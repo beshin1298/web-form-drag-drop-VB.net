@@ -2,43 +2,73 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <main>
-        <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-            <p><a href="http://www.asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-        </section>
+    <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Height="500px" Width="1000px" Style="margin-right: 11px">
 
-        <div class="row">
-            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-                <h2 id="gettingStartedTitle">Getting started</h2>
-                <p>
-                    ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-                A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="librariesTitle">
-                <h2 id="librariesTitle">Get more libraries</h2>
-                <p>
-                    NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-                </p>
-            </section>
-            <section class="col-md-4" aria-labelledby="hostingTitle">
-                <h2 id="hostingTitle">Web Hosting</h2>
-                <p>
-                    You can easily find a web hosting company that offers the right mix of features and price for your applications.
-                </p>
-                <p>
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-                </p>
-            </section>
-        </div>
-    </main>
+        <ajaxToolkit:TabPanel runat="server" HeaderText="Product" ID="TabPanel1">
+            <ContentTemplate>
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="SqlDataSource1" Height="56px" Width="944px">
+                    <Columns>
+                        <asp:BoundField DataField="id" HeaderText="id" InsertVisible="False" ReadOnly="True" SortExpression="id" />
+                        <asp:BoundField DataField="name" HeaderText="name" SortExpression="name" />
+                        <asp:BoundField DataField="code" HeaderText="code" SortExpression="code" />
+                    </Columns>
+                </asp:GridView>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Drag_Drop_DemoConnectionString %>" SelectCommand="SELECT * FROM [m_product]"></asp:SqlDataSource>
+            </ContentTemplate>
+        </ajaxToolkit:TabPanel>
+
+        <ajaxToolkit:TabPanel runat="server" HeaderText="Client" ID="TabPanel2">
+            <ContentTemplate>
+
+                <asp:GridView ID="gClient" runat="server" Height="16px" Width="980px" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" AutoGenerateColumns="False" ForeColor="Black">
+                    <Columns>
+
+                        <asp:BoundField DataField="id" HeaderText="id" InsertVisible="False" ReadOnly="True" SortExpression="id" />
+
+
+                        <asp:TemplateField HeaderText="name">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtName" runat="server" Text='<%# Bind("name") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField HeaderText="email">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtEmail" runat="server" Text='<%# Bind("email") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+
+                        <asp:TemplateField HeaderText="code">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtCode" runat="server" Text='<%# Bind("code") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+
+                        <asp:ButtonField ButtonType="Button" CommandName="Copy" ShowHeader="True" Text="Copy" />
+
+                    </Columns>
+                    <FooterStyle BackColor="#CCCCCC" />
+                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle ForeColor="Black" HorizontalAlign="Left" BackColor="#CCCCCC" />
+                    <RowStyle BackColor="White" />
+                    <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                    <SortedAscendingHeaderStyle BackColor="Gray" />
+                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                    <SortedDescendingHeaderStyle BackColor="#383838" />
+                </asp:GridView>
+                <asp:Button ID="btnAddNewRow" runat="server" Text="Add new Row"  CommandName="AddNew"/>
+                
+                <br />
+                <br />
+                <asp:Button ID="btnSave" runat="server" Text="Save" />
+            </ContentTemplate>
+
+        </ajaxToolkit:TabPanel>
+
+    </ajaxToolkit:TabContainer>
 
 </asp:Content>
